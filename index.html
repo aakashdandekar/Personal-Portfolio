@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000000;
+      margin: 0;
+      padding: 20px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: white;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      display: block;
+    }
+
+    header {
+      margin: 17px 10px;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    header .name {
+      font-size: 80px;
+      color: #00ff00;
+    }
+
+    /* Grid layout */
+    .grid_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Buttons */
+    .grid_container button {
+      background: transparent;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    .grid_container button:hover {
+      background: rgba(0, 255, 0, 0.1);
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    /* Overlay Output Box */
+    .output-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      padding: 20px;
+      width: 60%;
+      max-width: 600px;
+      text-align: justify;
+      font-family: monospace;
+      font-size: 18px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease-in-out;
+      z-index: 2;
+    }
+
+    .output-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Close button */
+    .output-overlay .close-btn {
+      display: block;
+      margin-top: 15px;
+      background: transparent;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+
+    .output-overlay .close-btn:hover {
+      background: rgba(0, 255, 0, 0.2);
+    }
+
+    a {
+        color: #00ff00;
+        text-decoration: none;
+    }
+
+    a:active {
+        color: #00ff00;
+        text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Matrix Background -->
+  <canvas id="binaryCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('binaryCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "rgba(0, 255, 0, 0.4)";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = Math.random() > 0.5 ? "1" : "0";
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+  <!-- Header -->
+  <header>
+    <p class="name">Aakash Dandekar</p>
+  </header>
+
+  <!-- Main -->
+  <div class="grid_container">
+    <button onclick="showOutput(data1)">Profile</button>
+    <button onclick="showOutput(data2)">Certifications</button>
+    <button onclick="showOutput(data3)">Projects</button>
+    <button onclick="showOutput(data4)">Contact</button>
+  </div>
+
+  <!-- Output -->
+  <div class="output-overlay" id="outputBox">
+    <div id="outputContent"></div>
+    <button class="close-btn" onclick="closeOutput()">Close</button>
+  </div>
+
+  <script>
+    function showOutput(content) {
+      const box = document.getElementById("outputBox");
+      const contentDiv = document.getElementById("outputContent");
+      contentDiv.innerHTML = content;
+      box.classList.add("show");
+    }
+
+    let data1 = "<center><u><b>&nbsp;&nbsp;Profile&nbsp;&nbsp;</b></u></center><br>Name: Aakash Atul Dandekar<br>Program: B.Tech Computer Science and Engineering<br>Year: 2<sup>nd</sup><br>College: Parul Institute of Technology<br>Git Hub: <a href = https://github.com/aakashdandekar>aakashdandekar</a><br>Linked In: <a href = >Click Here</a><br><br>";
+
+    let data2 = "<center><u><b>&nbsp;&nbsp;Certifications&nbsp;&nbsp;</b></u></center><br><ul><li><a href = ./htmlncss.jpg>Certified in HTML and CSS</a></li><li><a href = ./javscript.jpg>Certified in JavaScript</a></li><li><a href = >Certified in Python DSA</a></li></ul><br>";
+
+    let data3 = "<center><u><b>&nbsp;&nbsp;Projects&nbsp;&nbsp;</b></u></center><br>Personal Portfolio<br>Basic Python Chat-bot<br>Password-Generation Game<br>Calculator<br>";
+
+    let data4 = "<center><u><b>&nbsp;&nbsp;Contact&nbsp;&nbsp;</b></u></center><br>Phone Number: 853xxxxxx8<br>e-mail: aakashdandekar2006@gmail.com<br>Git Hub: https://github.com/aakashdandekar<br>Linked In: aakashdandekar09<br>";
+
+    function closeOutput() {
+      const box = document.getElementById("outputBox");
+      box.classList.remove("show");
+    }
+  </script>
+</body>
+</html>
