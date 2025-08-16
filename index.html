@@ -36,6 +36,11 @@
       color: #00ff00;
     }
 
+    header .name sub {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
     /* Grid layout */
     .grid_container {
       display: grid;
@@ -163,12 +168,14 @@
 
   <!-- Header -->
   <header>
-    <p class="name">Aakash Dandekar</p>
+    <p class="name">Aakash Dandekar<sub>Software Engineer</sub></p>
   </header>
 
   <!-- Main -->
   <div class="grid_container">
     <button onclick="showOutput(data1)">Profile</button>
+    <button onclick="showOutput(data5)">About</button>
+    <button onclick="showOutput(data6)">Skills</button>
     <button onclick="showOutput(data2)">Certifications</button>
     <button onclick="showOutput(data3)">Projects</button>
     <button onclick="showOutput(data4)">Contact</button>
@@ -195,6 +202,10 @@
     let data3 = "<center><u><b>&nbsp;&nbsp;Projects&nbsp;&nbsp;</b></u></center><br>Personal Portfolio<br>Basic Python Chat-bot<br>Password-Generation Game<br>Calculator<br>";
 
     let data4 = "<center><u><b>&nbsp;&nbsp;Contact&nbsp;&nbsp;</b></u></center><br>Phone Number: 853xxxxxx8<br>e-mail: aakashdandekar2006@gmail.com<br>Git Hub: https://github.com/aakashdandekar<br>Linked In: aakashdandekar09<br>";
+
+    let data5 = "<center><u><b>&nbsp;&nbsp;About&nbsp;&nbsp;</b></u></center><br>Hello, I am Aakash Atul Dandekar. My passion for studying Computer Science and Engineering comes from my love for logic, precision, and problem-solving. I truly enjoy tackling algorithmic challenges like binary search and recursion. It’s not just about finding solutions; it's about creating elegant and efficient ones. My curiosity drives me to understand the “why” behind every fix, whether I’m debugging a recursive function or handling edge cases in code. I’m interested in system architecture, from designing ER diagrams to optimizing SQL queries, and I like building solutions that are both functional and polished. I never settle for “good enough.” I aim for technical excellence and clarity in everything I do. I learn best through hands-on experience by iterating, experimenting, and improving. CSE provides the ideal environment for that growth. Whether it’s backend development, systems programming, or data engineering, I see this field as a way to master the tools and concepts that shape the digital world. I’m excited to continue pushing my limits and growing as a developer.";
+
+    let data6 = "<center><u><b>&nbsp;&nbsp;Skills&nbsp;&nbsp;</b></u></center><br><ul><li>Basic Front-end Development</li><li>Python Development</li></ul>";
 
     function closeOutput() {
       const box = document.getElementById("outputBox");
